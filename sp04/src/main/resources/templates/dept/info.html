@@ -7,7 +7,30 @@
 </head>
 <body>
 	<div>
-	
+		<h3>부서 상세 조회</h3>
+		<div>
+			<div>
+				<label for="did">부서번호</label>
+				<input id="did" type="text" th:value="${dept.departmentId}" readonly></input>
+			</div>
+			<div>
+				<label for="dname">부서이름</label>
+				<input id="dname" type="text" th:value="${dept.departmentName}" readonly></input>
+			</div>
+			<div>
+				<label for="manaid">매니저 번호</label>
+				<input id="manaid" type="text" th:value="${dept.managerId}" readonly></input>
+			</div>
+			<div>
+				<label for="locid">장소 번호</label>
+				<input id="locid" type="text" th:value="${dept.locationId}" readonly></input>
+			</div>
+		</div>
+		<div>
+				<button type="button" class="btn btn-warning" th:onclick="|location.href='@{deptUpdate(employeeId=${dept.departmentId})}'|">수정</button>
+				<button type="button" class="btn btn-secondary" th:onclick="|location.href= '@{/empList}'|" >목록</button>
+				<button type="button" class="btn btn-danger" th:onclick="|location.href='@{deptDelete(deptId=${dept.departmentId})}'|">삭제</button>
+		</div>
 	</div>
 </body>
 </html>
