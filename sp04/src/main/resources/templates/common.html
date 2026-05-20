@@ -1,0 +1,40 @@
+<!DOCTYPE html>
+<html xmlns:th="https://www.thymeleaf.org">
+<head>
+<meta charset="UTF-8">
+<title></title>
+</head>
+<body>
+	<h1>타임리프</h1>
+	<ul>
+		<th:block th:each="num : ${#numbers.sequence(1,10)}">
+			<li>[[ ${num} ]]</li>
+		</th:block>
+	</ul>
+	<!--/* ${}, 변수 표현식 => 가장 많이 쓰는 표현식 */-->
+	<!--/* Controller에서 Model 객체에 페이지에 사용할 데이터를 담음
+		   => thymeleaf에서 사용할 변수
+		   thymeleaf에서는 ${}(변수표현식)을 이용해서 해당 데이터를 사용
+		   th:속성="${변수명}" 방식으로 기본 사용 */-->
+	<!--/* 클라이언트에는 가려지고 개발자들사이에서만 공유되는 타임리프주석 */-->
+	<h2>특정 사원 정보</h2>
+	<div>
+		<p th:text="${info.employeeId}"></p>
+		<label>[[ ${info.lastName} ]], <input th:value="${info.firstName}"></label>
+	</div>
+	<!--/* th:if와 th:each는 태그의 생성에 관여
+		   <th:block/> : thymeleaf의 유일한 태그
+		   <th:block th:each="임시변수[, 상태값] : ${변수명(배열타입)}"
+		   		<태그 th:속성="${임시변수}"></태그>
+		   </th:block>
+	*/-->
+	<th:block th:each="emp, stats : ${list}">
+		<ul th:if="${stats.count <= 10}">
+			<li>[[ ${stats.count} ]]</li>
+			<li name="사원번호">[[ ${emp.employeeId} ]]</li>
+			<li name="사원이름">[[ ${emp.lastName} ]]</li>
+			<li name="입사일">[[ ${#dates.format(emp.hireDate, 'yyyy년MM월dd일')} ]]</li>
+		</ul>
+	</th:block>
+</body>
+</html>
